@@ -24,7 +24,9 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f4;
+            background: url("{% static 'images/background.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+            /*background-color: #f4f4f4;*/
             margin: 0;
             padding: 0;
             display: flex;
@@ -34,7 +36,9 @@
         }
 
         .container {
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            /*background: linear-gradient(135deg, #6e8efb, #a777e3);*/
+            /*background: rgba(110, 142, 251, 0.8);*/
+            background: #07429a;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 600px;
@@ -60,7 +64,7 @@
 
         a {
             color: #fff;
-            background-color: #5cb85c;
+            background-color: #a6ad16;
             padding: 10px 20px;
             margin: 10px;
             text-decoration: none;

@@ -22,7 +22,8 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f4;
+            background: url("{% static 'images/background.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
             margin: 0;
             padding: 0;
             display: flex;
@@ -32,8 +33,7 @@
         }
 
         .container {
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background: #07429a;
             width: 100%;
             max-width: 400px;
             text-align: center;
@@ -52,7 +52,7 @@
         }
 
         .button {
-            background-color: #5cb85c;
+            background-color: #a6ad16;
             color: white;
             padding: 10px 20px;
             margin-top: 20px;
@@ -63,6 +63,7 @@
 
         .button:hover {
             background-color: #4cae4c;
+            text-decoration: underline;
         }
     </style>
 </head>

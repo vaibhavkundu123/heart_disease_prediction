@@ -26,7 +26,8 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f4;
+            background: url("{% static 'images/background.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
             margin: 0;
             padding: 0;
             display: flex;
@@ -36,7 +37,7 @@
         }
 
         .container {
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            background: #07429a;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             /*padding: 20px;*/
             width: 100%;
@@ -62,7 +63,7 @@
         }
 
         .button {
-            background-color: #5cb85c;
+            background-color: #a6ad16;
             color: white;
             border: none;
             text-decoration: none;
@@ -73,8 +74,9 @@
             display: inline-block;
         }
 
-        button:hover {
+        .button:hover {
             background-color: #4cae4c;
+            text-decoration: underline;
         }
 
         p {
@@ -82,12 +84,21 @@
             margin-top: 20px;
         }
 
-        a {
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .forgot-password {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        .forgot-password a {
             color: #5cb85c;
             text-decoration: none;
         }
 
-        a:hover {
+        .forgot-password a:hover {
             text-decoration: underline;
         }
     </style>
@@ -101,6 +112,9 @@
             <button class="button" type="submit">Login</button>
         </form>
         <p>Don't have an account? <a class="button" href="{% url 'register' %}">Register here</a></p>
+        <div class="forgot-password">
+            <p><a href="{% url 'password_reset' %}">Forgot Password?</a></p>
+        </div>
     </div>
 </body>
 </html>
