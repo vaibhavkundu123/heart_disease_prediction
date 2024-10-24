@@ -25,7 +25,7 @@
     {% load static %}
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
@@ -36,17 +36,23 @@
         }
 
         .container {
-            background: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            /*padding: 20px;*/
             width: 100%;
-            height: 100%;
-            max-width: none;
+            /*height: 100%;*/
+            max-height: none;
+            max-width: 40%;
+            /*max-width: none;*/
+            border-radius: 10px;
             text-align: center;
-            justify-content: center;
+            /*justify-content: center;*/
+            display: flex;
+            flex-direction: column;
         }
 
-        h2 {
-            color: #333;
+        h1 {
+            color: #fff;
         }
 
         form {
@@ -55,14 +61,16 @@
             align-items: center;
         }
 
-        button {
+        .button {
             background-color: #5cb85c;
             color: white;
             border: none;
-            padding: 10px;
+            text-decoration: none;
+            padding: 10px 20px;
             cursor: pointer;
             margin-top: 10px;
-            width: 50%;
+            border-radius: 5px;
+            display: inline-block;
         }
 
         button:hover {
@@ -70,6 +78,7 @@
         }
 
         p {
+            color: #fff;
             margin-top: 20px;
         }
 
@@ -89,9 +98,9 @@
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Login</button>
+            <button class="button" type="submit">Login</button>
         </form>
-        <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+        <p>Don't have an account? <a class="button" href="{% url 'register' %}">Register here</a></p>
     </div>
 </body>
 </html>

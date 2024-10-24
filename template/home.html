@@ -23,7 +23,7 @@
     {% load static %}
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
@@ -34,42 +34,54 @@
         }
 
         .container {
-            background: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             width: 100%;
-            height: 100%;
-            max-width: none;
+            max-width: 600px;
             text-align: center;
-            justify-content: center;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
+            padding: 20px;
+            border-radius: 10px;
         }
 
         h1 {
-            color: #333;
+            color: #fff;
             margin-bottom: 20px;
         }
 
         p {
+            color: #fff;
             margin-top: 20px;
+            font-size: 1.2em;
         }
 
         a {
-            color: #5cb85c;
+            color: #fff;
+            background-color: #5cb85c;
+            padding: 10px 20px;
+            margin: 10px;
             text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
         }
 
         a:hover {
-            text-decoration: underline;
+            background-color: #4cae4c;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Heart Disease Predictor</h1>
-        <p>"Heart Disease Predictor"</p>
-        <p><a href="{% url 'login' %}">Login</a> <br> OR <a href="{% url 'register' %}">Register</a></p>
+        <p>Welcome to the Heart Disease Predictor</p>
+        <p>
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'register' %}">Register</a>
+        </p>
     </div>
 </body>
 </html>
