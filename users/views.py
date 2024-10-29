@@ -29,8 +29,9 @@ def register(request):
             doctor_name = form.cleaned_data.get('doctor_name')
             weight = form.cleaned_data.get('weight')
             blood_pressure = form.cleaned_data.get('blood_pressure')
+            gender = form.cleaned_data.get('gender')
             # Saving phone number and dob to the user profile model
-            profile = UserProfile(user=user, phone_number=phone_number, dob=dob, hospital_name=hospital_name, doctor_name=doctor_name, weight=weight, blood_pressure=blood_pressure)
+            profile = UserProfile(user=user, phone_number=phone_number, dob=dob, hospital_name=hospital_name, doctor_name=doctor_name, weight=weight, blood_pressure=blood_pressure, gender=gender)
             profile.save()
             login(request, user)
             return redirect('successfully_registered')
