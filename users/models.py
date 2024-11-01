@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 # Create your models here.
@@ -19,3 +20,4 @@ class UserProfile(models.Model):
     blood_pressure = models.CharField(blank=True, max_length=7)
     gender = models.CharField(max_length=100, choices=GENDER_CHOICES, default='No Choice')
     reset_code = models.CharField(max_length=6, blank=True, null=True)
+    reset_code_timestamp = models.DateTimeField(null=True, blank=True)

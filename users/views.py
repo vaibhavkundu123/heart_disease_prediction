@@ -18,10 +18,12 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 from django.utils.encoding import force_str
+from django.utils import timezone
+from datetime import timedelta
 
-for user in User.objects.all():
-    if not hasattr(user, 'userprofile'):
-        UserProfile.objects.create(user=user)
+# for user in User.objects.all():
+#     if not hasattr(user, 'userprofile'):
+#         UserProfile.objects.create(user=user)
 
 
 # Create your views here.
@@ -110,21 +112,21 @@ class CustomPasswordResetView(PasswordResetView):
         email = form.cleaned_data['email']
         user = User.objects.get(email=email)
         
-        # Ensure the user has a UserProfile
         if not hasattr(user, 'userprofile'):
             UserProfile.objects.create(user=user)
         
         code = random.randint(100000, 999999)
         user.userprofile.reset_code = code
+        user.userprofile.reset_code_timestamp = timezone.now()
         user.userprofile.save()
         send_mail(
             'Password Reset Code',
-            f'Your password reset code is {code}',
+            f'Your password reset code is {code}. This code will expire in 5 minutes.',
             settings.DEFAULT_FROM_EMAIL,
             [email],
         )
         return redirect('verify_code')
-
+    
 
 def verify_code(request):
     if request.method == 'POST':
@@ -133,11 +135,14 @@ def verify_code(request):
             code = form.cleaned_data['code']
             try:
                 user = User.objects.get(userprofile__reset_code=code)
-                # Generate URL-safe base64 encoded uid
+                time_limit = timezone.now() - timedelta(minutes=5)
+                if user.userprofile.reset_code_timestamp < time_limit:
+                    return render(request, 'users/verify_code.html', {
+                        'expired': True
+                    })
+                # ... rest of the validation logic
                 uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
-                # Generate token
                 token = default_token_generator.make_token(user)
-                # Save token to user profile
                 user.userprofile.reset_code = token
                 user.userprofile.save()
                 return redirect('password_reset_confirm', uidb64=uidb64, token=token)
@@ -145,7 +150,13 @@ def verify_code(request):
                 form.add_error('code', 'Invalid code')
     else:
         form = CodeVerificationForm()
-    return render(request, 'users/verify_code.html', {'form': form})
+    
+    context = {
+        'form': form,
+        'start_time': request.session.get('reset_code_timestamp', timezone.now().isoformat()),
+        'expired': False
+    }
+    return render(request, 'users/verify_code.html', context)
 
 
 class CustomPasswordResetDoneView(PasswordResetDoneView):
