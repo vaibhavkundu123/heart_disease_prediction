@@ -16,3 +16,7 @@ class RegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'phone_number', 'dob', 'gender', 'hospital_name', 'doctor_name', 'weight', 'blood_pressure', 'password1', 'password2']
+
+
+class CodeVerificationForm(forms.Form):
+    code = forms.CharField(max_length=6, required=True)

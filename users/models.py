@@ -18,3 +18,4 @@ class UserProfile(models.Model):
     weight = models.DecimalField(blank=True, null=True, max_digits=5, decimal_places=2)
     blood_pressure = models.CharField(blank=True, max_length=7)
     gender = models.CharField(max_length=100, choices=GENDER_CHOICES, default='No Choice')
+    reset_code = models.CharField(max_length=6, blank=True, null=True)

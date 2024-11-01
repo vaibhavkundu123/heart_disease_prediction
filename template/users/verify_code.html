@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Reset</title>
+    <title>Verify Code</title>
     {% load static %}
     <style>
         body {
@@ -65,11 +65,11 @@
 </head>
 <body>
     <div class="container">
-        <h1>Password Reset</h1>
+        <h1>Verify Code</h1>
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <button class="button" type="submit">Send Code</button>
+            <button class="button" type="submit">Verify</button>
         </form>
     </div>
 </body>
