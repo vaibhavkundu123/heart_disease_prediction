@@ -17,6 +17,12 @@ class RegisterForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'phone_number', 'dob', 'gender', 'hospital_name', 'doctor_name', 'weight', 'blood_pressure', 'password1', 'password2']
 
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError("This email address is already registered. Please use a different email.")
+        return email
+
 
 class CodeVerificationForm(forms.Form):
     code = forms.CharField(max_length=6, required=True)
