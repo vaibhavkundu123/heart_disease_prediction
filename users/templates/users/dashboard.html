@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Predictor</title>
+    {% load static %}
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url("{% static 'images/background.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #07429a;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-height: none;
+            max-width: 40%;
+            border-radius: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1 {
+            color: #fff;
+        }
+
+        h2 {
+            color: #fff;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .button {
+            background-color: #a6ad16;
+            color: white;
+            border: none;
+            text-decoration: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .button:hover {
+            background-color: #4cae4c;
+            text-decoration: underline;
+        }
+
+        p {
+            color: #fff;
+            margin-top: 20px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .forgot-password {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .forgot-password a {
+            color: #0af30a;
+            text-decoration: none;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard</h1>
+        <h2>Welcome, {{ user.username }}!</h2>
+        <div style="margin-top: 20px;">
+            <button onclick="location.href='{% url 'view_history' %}'" class="button" style="margin-bottom: 10px;">View History</button>
+            <button onclick="location.href='{% url 'prediction_view' %}'" class="button" style="margin-bottom: 10px;">Do Prediction</button>
+        </div>
+    </div>
+    <!-- Logout button in the top right corner -->
+    <div style="position: fixed; top: 20px; right: 20px;">
+    <a href="{% url 'logout' %}" class="button" style="background-color: #dc3545;">Logout</a>
+</div>
+</body>
+</html>

@@ -26,4 +26,9 @@ urlpatterns = [
     path('password_reset/done/', views.CustomPasswordResetDoneView.as_view(), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', views.CustomPasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset/done/', views.CustomPasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    # Prediction-related URL (main prediction form page)
+    path('dashboard/', views.dashboard_view, name='dashboard_view'),
+    path('view_history/', views.view_history, name='view_history'),
+    path('predict/', views.prediction_view, name='prediction_view'),
+    path('logout/', views.logout_view, name='logout'),
 ]

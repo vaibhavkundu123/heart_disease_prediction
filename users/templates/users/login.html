@@ -1,0 +1,120 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    {% load static %}
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url("{% static 'images/background.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #07429a;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            /*padding: 20px;*/
+            width: 100%;
+            /*height: 100%;*/
+            max-height: none;
+            max-width: 40%;
+            /*max-width: none;*/
+            border-radius: 10px;
+            text-align: center;
+            /*justify-content: center;*/
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1 {
+            color: #fff;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .button {
+            background-color: #a6ad16;
+            color: white;
+            border: none;
+            text-decoration: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .button:hover {
+            background-color: #4cae4c;
+            text-decoration: underline;
+        }
+
+        p {
+            color: #fff;
+            margin-top: 20px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .forgot-password {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .forgot-password a {
+            color: #0af30a;
+            text-decoration: none;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="button" type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a class="button" href="{% url 'register' %}">Register here</a></p>
+        <div class="forgot-password">
+            <p><a href="{% url 'password_reset' %}">Forgot Password?</a></p>
+        </div>
+    </div>
+</body>
+</html>
