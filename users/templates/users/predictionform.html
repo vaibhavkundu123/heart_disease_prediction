@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% comment %} <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -96,5 +96,205 @@
             <button type="submit" class="button">Predict</button>
         </form>
     </div>
+</body>
+</html> {% endcomment %}
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Prediction Form</title>
+    {% load static %}
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url("{% static 'images/background.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar-custom {
+            background-color: #07429a;
+        }
+
+        .navbar-custom .navbar-brand,
+        .navbar-custom .nav-link {
+            color: #fff;
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: #a6ad16;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            margin-top: 80px; /* Add padding between navbar and form */
+        }
+
+        .disclaimer-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            color: #333;
+            text-align: left;
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40%;
+            left: 5%; /* Move more towards the left */
+        }
+
+        .disclaimer-heading {
+            color: #07429a;
+        }
+
+        .instructions {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 10px;
+        }
+
+        .form-container {
+            background: rgba(7, 66, 154, 0.9);
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+            color: #fff;
+            margin-left: auto;
+            /*right: 5%;  Move more towards the right */
+        }
+
+        h1 {
+            color: #fff;
+        }
+
+        form {
+            color: #fff;
+        }
+
+        .btn-custom {
+            background-color: #a6ad16;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .btn-custom:hover {
+            background-color: #4cae4c;
+        }
+
+        .link-custom {
+            color: #a6ad16;
+        }
+
+        .link-custom:hover {
+            color: #4cae4c;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            height: 100%;
+        }
+
+        label {
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .logout-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .logout-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <a class="navbar-brand" href="{% url 'home' %}">MyWebsite</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item" style="padding-right: 10px;">
+                    <a class="nav-link" href="{% url 'view_history' %}">View History</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link logout-button" href="{% url 'logout' %}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="disclaimer-container">
+                    <h3 class="disclaimer-heading">Welcome to Heart Disease Prediction System</h3>
+                    <div class="disclaimer-content">
+                        <p>This system helps predict potential heart disease risks based on your input data. Please note that this is a preliminary assessment tool and should not replace professional medical advice.</p>
+                        <h4 style="color: #0056b3; margin-top: 20px;">Instructions:</h4>
+                        <ul class="instructions">
+                            <li>Fill all fields accurately with your latest health data</li>
+                            <li>Use numerical values where required</li>
+                            <li>Double-check your entries before submission</li>
+                            <li>Consult your healthcare provider for interpretation of results</li>
+                            <li>Keep your medical records handy while filling the form</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-container">
+                    <h1>Health Prediction Form</h1>
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        {% for field in form %}
+                        <div class="form-group">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {{ field.errors }}
+                            {{ field }}
+                        </div>
+                        {% endfor %}
+                        <button type="submit" class="btn btn-custom">Predict</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
